@@ -10,14 +10,8 @@ interface ReactScrollProp {
   children?: ReactNode;
 }
 
-enum BaseLinePositionType {
-  TOP,
-  MIDDLE,
-  BOTTOM,
-}
-
 interface BaseLineOption {
-  position?: BaseLinePositionType;
+  position?: string;
   offset?: number;
 }
 
@@ -31,7 +25,7 @@ function ReactScroll(prop: ReactScrollProp) {
 
   const targetID = prop.targetID;
   const baseLineOption = {
-    position: BaseLinePositionType.TOP,
+    position: "top",
     offset: 0,
     ...prop.baseLineOption,
   };
@@ -58,11 +52,11 @@ function ReactScroll(prop: ReactScrollProp) {
       elementRect.bottom + window.scrollY + elementOption.bottomOffset;
     const baseLinePos =
       window.scrollY +
-      (baseLineOption.position == BaseLinePositionType.TOP
-        ? 0
-        : baseLineOption.position == BaseLinePositionType.MIDDLE
+      (baseLineOption.position == "bottom"
+        ? window.innerHeight
+        : baseLineOption.position == "middle"
         ? window.innerHeight / 2
-        : window.innerHeight) +
+        : 0) +
       baseLineOption.offset;
 
     setActive(topScroll <= baseLinePos && baseLinePos <= bottomScroll);
@@ -98,10 +92,5 @@ function ReactScroll(prop: ReactScrollProp) {
   );
 }
 
-export {
-  ReactScroll,
-  ReactScrollProp,
-  BaseLineOption,
-  ElementOption,
-  BaseLinePositionType,
-};
+export { ReactScroll };
+export type { ReactScrollProp, BaseLineOption, ElementOption };

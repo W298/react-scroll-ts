@@ -1,7 +1,6 @@
-export {
-  ReactScroll,
+export { ReactScroll } from "./components/ReactScroll";
+export type {
   ReactScrollProp,
   BaseLineOption,
   ElementOption,
-  BaseLinePositionType,
 } from "./components/ReactScroll";
